@@ -34,4 +34,15 @@ public class Restaurant {
 
     @Column(name = "updated_at")
     private Instant updatedAt;
+
+    @Override
+    public String toString() {
+        return "Restaurant{" +
+                "id=" + id +
+                ", restaurantName='" + restaurantName + '\'' +
+                ", category='" + category + '\'' +
+                ", rating=" + rating +
+                ", region=" + (region != null ? region.getAddress() : "N/A") +
+                '}';
+    }
 }
