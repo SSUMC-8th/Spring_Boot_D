@@ -30,5 +30,6 @@ public class Terms extends BaseEntity {
     private Boolean isRequired;
 
     @OneToMany(mappedBy = "terms")
+    @Builder.Default
     private List<MemberAgree> memberAgrees = new ArrayList<>();
 }

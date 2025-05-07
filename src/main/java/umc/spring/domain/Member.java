@@ -50,14 +50,18 @@ public class Member extends BaseEntity {
     private Integer point;
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<MemberAgree> memberAgrees = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<MemberPrefer> memberPrefers = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<MemberMission> memberMissions = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
+    @Builder.Default
     private List<Review> reviews = new ArrayList<>();
 }
