@@ -32,5 +32,6 @@ public class Review extends BaseEntity {
     private Store store;
 
     @OneToMany(mappedBy = "review")
+    @Builder.Default
     private List<ReviewImage> reviewImages = new ArrayList<>();
 }

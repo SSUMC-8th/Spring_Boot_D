@@ -23,5 +23,6 @@ public class FoodCategory extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "foodCategory")
+    @Builder.Default
     private List<MemberPrefer> memberPrefers = new ArrayList<>();
 }
