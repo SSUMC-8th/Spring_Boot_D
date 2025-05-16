@@ -20,6 +20,7 @@ public class Review extends Base {
     private String content;
     private int star;
 
+    @Builder.Default
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
