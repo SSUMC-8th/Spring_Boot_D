@@ -3,6 +3,8 @@ package umc.spring.domain;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -11,12 +13,20 @@ import java.util.List;
 
 @Getter
 @Setter
+@DynamicUpdate
+@DynamicInsert
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name = "member")
 public class Member {
+    @PrePersist
+    public void onCreate() {
+        this.createdAt = Instant.now();
+        this.updatedAt = Instant.now();
+    }
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
@@ -34,7 +44,7 @@ public class Member {
     @Column(name = "platform", length = 15)
     private String platform;
 
-    @Column(name = "email", length = 10)
+    @Column(name = "email", length = 100)
     private String email;
 
     @Column(name = "name", length = 10)
@@ -61,7 +71,7 @@ public class Member {
 
     @ColumnDefault("'active'")
     @Column(name = "status", nullable = false, length = 15)
-    private String status;
+    private String status = "active";
 
     @Column(name = "inactive_date")
     private Instant inactiveDate;
@@ -71,6 +81,8 @@ public class Member {
 
     @ColumnDefault("0")
     @Column(name = "point", nullable = false)
-    private Integer point;
+//    @Builder.Default
+    private Integer point = 0;
+
 
 }
