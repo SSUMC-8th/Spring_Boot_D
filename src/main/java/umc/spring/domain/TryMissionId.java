@@ -2,13 +2,10 @@ package umc.spring.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
-//import jakarta.persistence.GeneratedValue;
-//import jakarta.persistence.GenerationType;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -17,7 +14,6 @@ import java.util.Objects;
 @Embeddable
 public class TryMissionId implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Column(name = "try_mission_id", nullable = false)

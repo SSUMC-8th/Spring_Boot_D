@@ -7,7 +7,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,48 +37,20 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
         return handleExceptionInternalConstraint(e, ErrorStatus.valueOf(errorMessage), HttpHeaders.EMPTY,request);
     }
 
-//    @Override
-//    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-//
-//        Map<String, String> errors = new LinkedHashMap<>();
-//
-//        e.getBindingResult().getFieldErrors().stream()
-//                .forEach(fieldError -> {
-//                    String fieldName = fieldError.getField();
-//                    String errorMessage = Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
-//                    errors.merge(fieldName, errorMessage, (existingErrorMessage, newErrorMessage) -> existingErrorMessage + ", " + newErrorMessage);
-//                });
-//
-//        return handleExceptionInternalArgs(e,HttpHeaders.EMPTY,ErrorStatus.valueOf("_BAD_REQUEST"),request,errors);
-//    }
-@Override
-public ResponseEntity<Object> handleMethodArgumentNotValid(
-        MethodArgumentNotValidException e,
-        HttpHeaders headers,
-        HttpStatusCode status,
-        WebRequest request) {
+    @Override
+    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
-    Map<String, String> errors = new LinkedHashMap<>();
-    String extractedMessage = ErrorStatus._BAD_REQUEST.getMessage();  // 기본 메시지
-    ErrorStatus extractedStatus = ErrorStatus._BAD_REQUEST;           // 기본 상태
+        Map<String, String> errors = new LinkedHashMap<>();
 
-    for (FieldError fieldError : e.getBindingResult().getFieldErrors()) {
-        String fieldName = fieldError.getField();
-        String rawMessage = Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
+        e.getBindingResult().getFieldErrors().stream()
+                .forEach(fieldError -> {
+                    String fieldName = fieldError.getField();
+                    String errorMessage = Optional.ofNullable(fieldError.getDefaultMessage()).orElse("");
+                    errors.merge(fieldName, errorMessage, (existingErrorMessage, newErrorMessage) -> existingErrorMessage + ", " + newErrorMessage);
+                });
 
-        try {
-            ErrorStatus enumStatus = ErrorStatus.valueOf(rawMessage); // ALREADY_TRIED_MISSION 등
-            errors.put(fieldName, enumStatus.name());
-            extractedMessage = enumStatus.getMessage();               // "이미 도전 중인 미션입니다."
-            extractedStatus = enumStatus;                             // 상태도 함께 변경
-        } catch (IllegalArgumentException ex) {
-            errors.put(fieldName, rawMessage); // 단순 메시지인 경우 그대로 유지
-        }
+        return handleExceptionInternalArgs(e,HttpHeaders.EMPTY,ErrorStatus.valueOf("_BAD_REQUEST"),request,errors);
     }
-
-    return handleExceptionInternalArgs(e, HttpHeaders.EMPTY, extractedStatus, request, errors);
-}
-
 
     @ExceptionHandler
     public ResponseEntity<Object> exception(Exception e, WebRequest request) {
