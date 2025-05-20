@@ -5,12 +5,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "review")
 public class Review {
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReviewPhoto> reviewPhotos = new ArrayList<>();
+
 
     @EmbeddedId
     private ReviewId id;
