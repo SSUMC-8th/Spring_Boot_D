@@ -35,4 +35,13 @@ public class Review extends BaseEntity {
 
     @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     private List<ReviewPicture> reviewPictureList = new ArrayList<>();
+
+    public void setReviewPicture(ReviewPicture reviewPicture) {
+        this.reviewPictureList.add(reviewPicture);
+        reviewPicture.setReview(this);
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
 }
