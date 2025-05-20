@@ -1,8 +1,7 @@
 package umc.spring.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
@@ -12,6 +11,9 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "member")
 public class Member {
@@ -20,6 +22,9 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReviewPhoto> reviewPhotos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PreferredFood> preferredFoodList = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +40,7 @@ public class Member {
     @Column(name = "name", length = 10)
     private String name;
 
-    @Column(name = "gender", length = 10)
+    @Column(name = "gender", length = 10) // 남성/여성
     private String gender;
 
     @Column(name = "birthdate")
@@ -44,6 +49,9 @@ public class Member {
     @Lob
     @Column(name = "address")
     private String address;
+
+    @Column(name = "spec_address")
+    private String specAddress;
 
     @Column(name = "created_at")
     private Instant createdAt;
