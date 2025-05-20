@@ -13,7 +13,7 @@ public class RestaurantResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class JoinResultDTO {
+    public static class RestaurantJoinResultDTO {
         Long restaurantId;
         LocalDateTime createdAt;
         LocalDateTime updatedAt;

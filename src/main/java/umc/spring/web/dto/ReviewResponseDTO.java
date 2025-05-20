@@ -13,7 +13,7 @@ public class ReviewResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class JoinResultDTO {
+    public static class ReviewJoinResultDTO {
         Long reviewId;
         LocalDateTime createdAt;
         LocalDateTime updatedAt;

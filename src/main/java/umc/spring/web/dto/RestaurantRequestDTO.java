@@ -8,7 +8,7 @@ import lombok.Getter;
 public class RestaurantRequestDTO {
 
     @Getter
-    public static class JoinDTO {
+    public static class RestaurantJoinDTO {
         @NotBlank
         @Size(max = 25)
         String name;

@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public class RestaurantConverter {
 
-    public static RestaurantResponseDTO.JoinResultDTO toJoinResultDTO(Restaurant restaurant) {
-        return RestaurantResponseDTO.JoinResultDTO.builder()
+    public static RestaurantResponseDTO.RestaurantJoinResultDTO toJoinResultDTO(Restaurant restaurant) {
+        return RestaurantResponseDTO.RestaurantJoinResultDTO.builder()
                 .restaurantId(restaurant.getId())
                 .createdAt(LocalDateTime.now())
                 .build();
     }
 
-    public static Restaurant toRestaurant(RestaurantRequestDTO.JoinDTO request) {
+    public static Restaurant toRestaurant(RestaurantRequestDTO.RestaurantJoinDTO request) {
         return Restaurant.builder()
                 .name(request.getName())
                 .type(request.getType())
