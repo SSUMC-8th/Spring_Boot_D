@@ -11,7 +11,7 @@ import umc.spring.domain.FoodCategory;
 import umc.spring.domain.Member;
 import umc.spring.domain.PreferredFood;
 import umc.spring.repository.MemberRepository;
-import umc.spring.repository.RestaurantRepository.FoodCategoryRepository;
+import umc.spring.repository.FoodCategoryRepository;
 import umc.spring.web.dto.MemberRequestDTO;
 
 import java.util.List;
