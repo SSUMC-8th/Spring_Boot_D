@@ -20,7 +20,7 @@ public class RestaurantCommandServiceImpl implements RestaurantCommandService {
     private final RegionRepository regionRepository;
 
     @Override
-    public Restaurant joinRestaurant(RestaurantRequestDTO.JoinDTO request) {
+    public Restaurant joinRestaurant(RestaurantRequestDTO.RestaurantJoinDTO request) {
 
         Restaurant newRestaurant = RestaurantConverter.toRestaurant(request);
 

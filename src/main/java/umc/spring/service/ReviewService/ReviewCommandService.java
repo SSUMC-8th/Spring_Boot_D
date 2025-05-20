@@ -4,5 +4,5 @@ import umc.spring.domain.Review;
 import umc.spring.web.dto.ReviewRequestDTO;
 
 public interface ReviewCommandService {
-    Review joinReview(Long restaurantId, ReviewRequestDTO.JoinDTO request);
+    Review joinReview(Long restaurantId, ReviewRequestDTO.ReviewJoinDTO request);
 }

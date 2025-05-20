@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 public class MemberConverter {
 
-    public static MemberResponseDTO.JoinResultDTO toJoinResultDTO(Member member){
-        return MemberResponseDTO.JoinResultDTO.builder()
+    public static MemberResponseDTO.MemberJoinResultDTO toJoinResultDTO(Member member){
+        return MemberResponseDTO.MemberJoinResultDTO.builder()
                 .memberId(member.getId())
                 .createdAt(LocalDateTime.now())
                 .build();
     }
 
-    public static Member toMember(MemberRequestDTO.JoinDto request){
+    public static Member toMember(MemberRequestDTO.MemberJoinDto request){
         Gender gender = null;
 
         switch (request.getGender()) {

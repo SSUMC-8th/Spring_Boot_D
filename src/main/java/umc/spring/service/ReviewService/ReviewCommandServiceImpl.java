@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import umc.spring.apiPayload.code.status.ErrorStatus;
-import umc.spring.apiPayload.exception.handler.FoodHandler;
 import umc.spring.apiPayload.exception.handler.RestaurantHandler;
 import umc.spring.converter.ReviewConverter;
 import umc.spring.domain.Restaurant;
@@ -27,7 +26,7 @@ public class ReviewCommandServiceImpl implements ReviewCommandService {
 
     @Override
     @Transactional
-    public Review joinReview(Long restaurantId, ReviewRequestDTO.JoinDTO request) {
+    public Review joinReview(Long restaurantId, ReviewRequestDTO.ReviewJoinDTO request) {
 
         Review newReview = ReviewConverter.toReview(request);
 
