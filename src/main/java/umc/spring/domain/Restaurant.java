@@ -49,4 +49,8 @@ public class Restaurant extends BaseEntity {
                 ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
                 '}';
     }
+
+    public void setRegion(Region region) {
+        this.region = region;
+    }
 }
