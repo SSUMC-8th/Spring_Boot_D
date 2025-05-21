@@ -25,6 +25,9 @@ public enum ErrorStatus implements BaseErrorCode {
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다."),;
 
 
+
+
+
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;
