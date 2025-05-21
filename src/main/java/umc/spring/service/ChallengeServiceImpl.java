@@ -3,7 +3,7 @@ package umc.spring.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import umc.spring.apiPayload.code.ChallengeResponseDTO;
+import umc.spring.web.dto.ChallengeResponseDTO;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.mapping.MemberMission;
