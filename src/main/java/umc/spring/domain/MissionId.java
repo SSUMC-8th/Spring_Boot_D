@@ -2,6 +2,7 @@ package umc.spring.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.GeneratedValue;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.Hibernate;
@@ -13,6 +14,7 @@ import java.util.Objects;
 @Embeddable
 public class MissionId implements java.io.Serializable {
     private static final long serialVersionUID = -3993916424914147097L;
+    @GeneratedValue
     @Column(name = "mission_id", nullable = false)
     private Long missionId;
 
