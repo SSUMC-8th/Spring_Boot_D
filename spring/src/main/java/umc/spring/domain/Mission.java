@@ -5,6 +5,7 @@ import lombok.*;
 import umc.spring.domain.common.Base;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Mission extends Base {
     private Long id;
     private String requirements;
     private int points;
-    private LocalDate dueAt;
+    private LocalDateTime dueAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "store_id")
