@@ -12,14 +12,15 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "open_hours")
 public class OpenHour {
+
     @Id
-    @Column(name = "restaurant_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "open_hour_id")
     private Long id;
 
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "restaurant_id", nullable = false)
-    private umc.spring.domain.Restaurant restaurant;
+    private Restaurant restaurant;
 
     @Column(name = "open_hour")
     private LocalTime openHour;
@@ -35,5 +36,4 @@ public class OpenHour {
 
     @Column(name = "updated_at")
     private Instant updatedAt;
-
 }
