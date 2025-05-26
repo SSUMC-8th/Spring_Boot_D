@@ -27,15 +27,42 @@ import java.util.Optional;
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
 
+//    @ExceptionHandler
+//    public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
+//        String errorMessage = e.getConstraintViolations().stream()
+//                .map(constraintViolation -> constraintViolation.getMessage())
+//                .findFirst()
+//                .orElseThrow(() -> new RuntimeException("ConstraintViolationException 추출 도중 에러 발생"));
+//
+//        return handleExceptionInternalConstraint(e, ErrorStatus.valueOf(errorMessage), HttpHeaders.EMPTY,request);
+//    }
+
     @ExceptionHandler
     public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
         String errorMessage = e.getConstraintViolations().stream()
                 .map(constraintViolation -> constraintViolation.getMessage())
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("ConstraintViolationException 추출 도중 에러 발생"));
+                .orElse("Validation failed");
 
-        return handleExceptionInternalConstraint(e, ErrorStatus.valueOf(errorMessage), HttpHeaders.EMPTY,request);
+        ErrorStatus matchedEnum = null;
+
+        // enum 존재 여부 확인
+        try {
+            matchedEnum = ErrorStatus.valueOf(errorMessage);
+        } catch (IllegalArgumentException ex) {
+            log.warn("ErrorStatus enum에 '{}' 값이 존재하지 않습니다. 일반 메시지로 처리합니다.", errorMessage);
+        }
+
+        if (matchedEnum != null) {
+            return handleExceptionInternalConstraint(e, matchedEnum, HttpHeaders.EMPTY, request);
+        } else {
+            ApiResponse<Object> body = ApiResponse.onFailure("VALIDATION_ERROR", errorMessage, null);
+            return ResponseEntity
+                    .badRequest()
+                    .body(body);
+        }
     }
+
 
     @Override
     public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
