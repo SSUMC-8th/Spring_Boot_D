@@ -39,6 +39,7 @@ public class RestaurantResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ReviewPreViewDTO {
+        String restaurantName;
         String ownerNickname;
         Float score;
         String body;
