@@ -22,7 +22,7 @@ public class MemberMission  extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "VARCHAR(15) DEFAULT 'INPROGRESS'")
-    private MissionStatus status;
+    private MissionStatus missionStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name= "member_id")
