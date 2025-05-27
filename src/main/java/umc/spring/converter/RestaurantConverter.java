@@ -36,7 +36,8 @@ public class RestaurantConverter {
 
     public static RestaurantResponseDTO.ReviewPreViewDTO reviewPreViewDTO(Review review) {
         return RestaurantResponseDTO.ReviewPreViewDTO.builder()
-                .ownerNickname(review.getMember().getName())
+                .restaurantName(review.getRestaurant().getName())
+                .ownerNickname(review.getMember().getNickname())
                 .score(review.getScore())
                 .createdAt(review.getCreatedAt().toLocalDate())
                 .body(review.getText())
