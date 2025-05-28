@@ -6,30 +6,30 @@ import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 
-@Getter
-@Setter
-@Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Entity
 @Table(name = "try_mission")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class TryMission {
 
-    @EmbeddedId
-    private TryMissionId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "try_mission_id", nullable = false)
+    private Long id;  // 단일 PK
 
-    @MapsId("memberId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
-    @MapsId("missionId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "mission_id", nullable = false)
     private Mission mission;
 
-    @ColumnDefault("'inprogress'")
     @Column(name = "status", nullable = false, length = 15)
+    @ColumnDefault("'inprogress'")
     private String status;
 
     @Column(name = "certification_num")
@@ -41,3 +41,4 @@ public class TryMission {
     @Column(name = "updated_at")
     private Instant updatedAt;
 }
+

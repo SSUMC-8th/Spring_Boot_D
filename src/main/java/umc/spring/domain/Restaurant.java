@@ -49,7 +49,7 @@ public class Restaurant {
                 ", restaurantName='" + restaurantName + '\'' +
                 ", category='" + category + '\'' +
                 ", rating=" + rating +
-                ", region=" + (region != null ? region.getAddress() : "N/A") +
+                ", region=" + (region != null ? region.getId() : "N/A") +
                 '}';
     }
 }

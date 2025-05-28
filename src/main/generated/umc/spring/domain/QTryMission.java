@@ -26,7 +26,7 @@ public class QTryMission extends EntityPathBase<TryMission> {
 
     public final DateTimePath<java.time.Instant> createdAt = createDateTime("createdAt", java.time.Instant.class);
 
-    public final QTryMissionId id;
+    public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final QMember member;
 
@@ -54,7 +54,6 @@ public class QTryMission extends EntityPathBase<TryMission> {
 
     public QTryMission(Class<? extends TryMission> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.id = inits.isInitialized("id") ? new QTryMissionId(forProperty("id")) : null;
         this.member = inits.isInitialized("member") ? new QMember(forProperty("member")) : null;
         this.mission = inits.isInitialized("mission") ? new QMission(forProperty("mission"), inits.get("mission")) : null;
     }

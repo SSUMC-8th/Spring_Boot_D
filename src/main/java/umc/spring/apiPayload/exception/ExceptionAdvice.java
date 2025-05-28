@@ -28,17 +28,36 @@ import java.util.Optional;
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
 
+//    @ExceptionHandler
+//    public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
+//        String errorMessage = e.getConstraintViolations().stream()
+//                .map(constraintViolation -> constraintViolation.getMessage())
+//                .findFirst()
+//                .orElseThrow(() -> new RuntimeException("ConstraintViolationException 추출 도중 에러 발생"));
+//
+//        return handleExceptionInternalConstraint(e, ErrorStatus.valueOf(errorMessage), HttpHeaders.EMPTY,request);
+//    }
+
     @ExceptionHandler
     public ResponseEntity<Object> validation(ConstraintViolationException e, WebRequest request) {
         String errorMessage = e.getConstraintViolations().stream()
                 .map(constraintViolation -> constraintViolation.getMessage())
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("ConstraintViolationException 추출 도중 에러 발생"));
+                .orElse("UNKNOWN_ERROR");
 
-        return handleExceptionInternalConstraint(e, ErrorStatus.valueOf(errorMessage), HttpHeaders.EMPTY,request);
+        // 메시지를 ErrorStatus enum으로 변환
+        ErrorStatus status;
+        try {
+            status = ErrorStatus.valueOf(errorMessage);
+        } catch (IllegalArgumentException ex) {
+            status = ErrorStatus._BAD_REQUEST;
+        }
+
+        return handleExceptionInternalConstraint(e, status, HttpHeaders.EMPTY, request);
     }
 
-//    @Override
+
+    //    @Override
 //    public ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException e, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 //
 //        Map<String, String> errors = new LinkedHashMap<>();
@@ -145,4 +164,6 @@ public ResponseEntity<Object> handleMethodArgumentNotValid(
                 request
         );
     }
+
+
 }
