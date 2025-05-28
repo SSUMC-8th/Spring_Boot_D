@@ -27,4 +27,7 @@ public class MemberMission extends BaseEntity {
 
     @Column(nullable = false)
     private Boolean isCompleted;
+
+    private String missionCode;
+
 }

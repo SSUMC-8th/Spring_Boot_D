@@ -21,4 +21,6 @@ public class StoreConverter {
                 .createdAt(store.getCreatedAt())  // BaseEntity가 처리 중이면 이대로
                 .build();
     }
+
+
 }
