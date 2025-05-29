@@ -12,13 +12,7 @@ public class TryMissionConverter {
 
     public static TryMission toTryMission(Member member, Mission mission) {
 
-        TryMissionId tryMissionId = new TryMissionId();
-        tryMissionId.setMemberId(member.getId());
-        tryMissionId.setMissionId(mission.getId());
-        tryMissionId.setTryMissionId(generateTryMissionId());
-
         return TryMission.builder()
-                .id(tryMissionId)
                 .member(member)
                 .mission(mission)
                 .status("inprogress")

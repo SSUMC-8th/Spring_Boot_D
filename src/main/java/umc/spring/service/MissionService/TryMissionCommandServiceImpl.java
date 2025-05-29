@@ -9,9 +9,12 @@ import umc.spring.converter.TryMissionConverter;
 import umc.spring.domain.Member;
 import umc.spring.domain.Mission;
 import umc.spring.domain.TryMission;
+import umc.spring.domain.TryMissionId;
 import umc.spring.repository.MemberRepository;
 import umc.spring.repository.MissionRepository;
 import umc.spring.repository.TryMissionRepository;
+
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
@@ -42,5 +45,14 @@ public class TryMissionCommandServiceImpl implements TryMissionCommandService {
         // 4. TryMission 생성 및 저장
         TryMission tryMission = TryMissionConverter.toTryMission(member, mission);
         return tryMissionRepository.save(tryMission);
+    }
+
+    @Override
+    public void completeMission(Long memberId, Long missionId) {
+        TryMission tryMission = tryMissionRepository.findByMemberIdAndMissionId(memberId, missionId)
+                .orElseThrow(() -> new GeneralException(ErrorStatus.TRYMISSION_NOT_FOUND));
+
+        tryMission.setStatus("complete");
+        tryMission.setUpdatedAt(Instant.now());
     }
 }
