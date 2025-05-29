@@ -17,4 +17,5 @@ public class GeneralException extends RuntimeException {
     public ErrorResponse getErrorResponseDtoWithHttpStatus() {
         return this.code.buildErrorDtoWithHttpStatus();
     }
+
 }

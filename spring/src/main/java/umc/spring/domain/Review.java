@@ -20,6 +20,10 @@ public class Review extends Base {
     private String content;
     private int star;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    private Store store;
+
     @Builder.Default
     @OneToMany(
             cascade = CascadeType.ALL,

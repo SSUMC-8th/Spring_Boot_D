@@ -35,6 +35,8 @@ public class QStore extends EntityPathBase<Store> {
 
     public final QRegion region;
 
+    public final NumberPath<Float> score = createNumber("score", Float.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
 
