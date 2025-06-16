@@ -34,11 +34,14 @@ public class MemberConverter {
 
         return Member.builder()
                 .address(request.getAddress())
+                .email(request.getEmail())
+                .password(request.getPassword())
                 .gender(gender)
                 .name(request.getName())
                 .birthYear(request.getBirthYear())
                 .birthMonth(request.getBirthMonth())
                 .birthDay(request.getBirthDay())
+                .role(request.getRole())
                 .favoriteFoodList(new ArrayList<>())
                 .build();
     }

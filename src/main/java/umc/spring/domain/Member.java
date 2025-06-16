@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.enums.Gender;
 import umc.spring.domain.enums.MemberStatus;
+import umc.spring.domain.enums.Role;
 import umc.spring.domain.mapping.FavoriteFood;
 import umc.spring.domain.mapping.MemberMission;
 import umc.spring.domain.mapping.MemberTerm;
@@ -72,6 +73,16 @@ public class Member extends BaseEntity {
     private LocalDate inactiveDate;
 
     private String profileImage;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    public void encodePassword(String password) {
+        this.password = password;
+    }
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberTerm> memberTermList = new ArrayList<>();

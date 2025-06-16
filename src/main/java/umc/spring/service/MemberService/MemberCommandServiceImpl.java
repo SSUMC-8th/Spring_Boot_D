@@ -2,6 +2,7 @@ package umc.spring.service.MemberService;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import umc.spring.apiPayload.code.status.ErrorStatus;
 import umc.spring.apiPayload.exception.handler.FoodHandler;
@@ -23,12 +24,16 @@ public class MemberCommandServiceImpl implements MemberCommandService{
 
     private final MemberRepository memberRepository;
     private final FoodRepository foodRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
     public Member joinMember(MemberRequestDTO.MemberJoinDto request) {
 
         Member newMember = MemberConverter.toMember(request);
+
+        newMember.encodePassword(passwordEncoder.encode(request.getPassword())); // 암호화
+
         List<Food> foodList = request.getPreferCategory().stream()
                 .map(category ->  {
                     return foodRepository.findById(category).orElseThrow(() -> new FoodHandler(ErrorStatus.FOOD_CATEGORY_NOT_FOUND));
