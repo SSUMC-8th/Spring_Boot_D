@@ -22,9 +22,13 @@ public enum ErrorResponse implements BaseErrorResponse {
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
     ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다."),
 
+    // 요청 파라미터 관련 에러
+    INVALID_PAGE_INDEX(HttpStatus.BAD_REQUEST, "COMMON4002", "page는 1 이상의 값이어야 합니다."),
+
     // 가게 없음 에러
     STORE_NOT_FOUND(HttpStatus.BAD_REQUEST, "STORE4001", "해당 스토어가 존재하지 않습니다.");
 
+    //
     private final HttpStatus httpStatus;
     private final String code;
     private final String message;
