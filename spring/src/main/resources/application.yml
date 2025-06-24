@@ -1,14 +1,17 @@
 spring:
   main:
     allow-bean-definition-overriding: true
+
   datasource:
     url: jdbc:mysql://localhost:3306/study
     username: root
     password: 1266
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   sql:
     init:
       mode: never
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -26,3 +29,8 @@ logging:
     org.hibernate.type.descriptor.sql: TRACE
     umc.spring.service.userservice: DEBUG
 
+jwt:
+  token:
+    secretKey: umceightfightingjwttokenauthentication
+    expiration:
+      access: 14400000

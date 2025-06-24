@@ -22,8 +22,11 @@ public enum ErrorResponse implements BaseErrorResponse {
 
     // For test
     TEMP_EXCEPTION(HttpStatus.BAD_REQUEST, "TEMP4001", "이거는 테스트"),
-    ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다.");
+    ARTICLE_NOT_FOUND(HttpStatus.NOT_FOUND, "ARTICLE4001", "게시글이 없습니다."),
 
+    // jwt 에러
+    INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "JWT401","유효하지 않은 토큰입니다."),
+    INVALID_PASSWORD(HttpStatus.UNAUTHORIZED, "JWT402", "비밀번호가 일치하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
